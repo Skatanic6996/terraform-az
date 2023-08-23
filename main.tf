@@ -24,6 +24,7 @@ resource "azurerm_virtual_machine" "sql_server" {
   location            = var.location
   resource_group_name = var.resource_group_name
   vm_size             = var.sql_server_vm_size
+  network_interface_ids = [azurerm_network_interface.sql_server[count.index].id]
 
   storage_image_reference {
     publisher = var.sql_server_image_publisher
@@ -64,6 +65,8 @@ resource "azurerm_virtual_machine" "report_server" {
   location            = var.location
   resource_group_name = var.resource_group_name
   vm_size             = var.report_server_vm_size
+  network_interface_ids = [azurerm_network_interface.report_server[count.index].id]
+
 
   storage_image_reference {
     publisher = var.report_server_image_publisher
