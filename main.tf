@@ -18,14 +18,19 @@ resource "azurerm_subnet" "subnet" {
 }
 
 # Create SQL Server virtual machines
-resource "azurerm_mssql_server" "sql_server" {
-  count                 = var.sql_server_count
-  name                  = "sql-server-${count.index}"
-  location              = var.location
-  resource_group_name   = var.resource_group_name
-  network_interface_ids = [azurerm_network_interface.sql_server_nic[count.index].id]
-  vm_size               = var.sql_server_vm_size
-  collation = var.sql_server_collation
+resource "azurerm_virtual_machine" "sql_server" {
+  count               = var.sql_server_count
+  name                = "sql-server-${count.index}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  vm_size             = var.sql_server_vm_size
+
+  storage_image_reference {
+    publisher = var.sql_server_image_publisher
+    offer     = var.sql_server_image_offer
+    sku       = var.sql_server_image_sku
+    version   = "latest"
+  }
 
   storage_os_disk {
     name              = "osdisk-${count.index}"
@@ -53,15 +58,19 @@ resource "azurerm_network_interface" "sql_server_nic" {
 }
 
 # Create Report Server virtual machines
-resource "azurerm_mssql_server" "report_server" {
-  count                 = var.report_server_count
-  name                  = "report-server-${count.index}"
-  location              = var.location
-  resource_group_name   = var.resource_group_name
-  network_interface_ids = [azurerm_network_interface.report_server_nic[count.index].id]
-  vm_size               = var.report_server_vm_size
-  collation = var.report_server_collation
+resource "azurerm_virtual_machine" "report_server" {
+  count               = var.report_server_count
+  name                = "report-server-${count.index}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  vm_size             = var.report_server_vm_size
 
+  storage_image_reference {
+    publisher = var.report_server_image_publisher
+    offer     = var.report_server_image_offer
+    sku       = var.report_server_image_sku
+    version   = "latest"
+  }
   storage_os_disk {
     name              = "osdisk-${count.index}"
     caching           = "ReadWrite"

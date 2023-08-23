@@ -123,12 +123,38 @@ variable "report_server_data_disk_size" {
   type        = number
 }
 
-variable "sql_server_collation" {
-  description = "Collation for SQL Server"
+variable "sql_server_image_publisher" {
+  description = "Publisher for the SQL Server VM image"
   type        = string
+  default     = "MicrosoftSQLServer"
 }
 
-variable "report_server_collation" {
-  description = "Collation for Report Server"
+variable "sql_server_image_offer" {
+  description = "Offer for the SQL Server VM image"
   type        = string
+  default     = "SQL2019-WS2019"
+}
+
+variable "sql_server_image_sku" {
+  description = "SKU for the SQL Server VM image"
+  type        = string
+  default     = "Standard"
+}
+
+variable "report_server_image_publisher" {
+  description = "Publisher for the Report Server VM image"
+  type        = string
+  default     = "MicrosoftSQLServer"
+}
+
+variable "report_server_image_offer" {
+  description = "Offer for the Report Server VM image"
+  type        = string
+  default     = "SQL2019-WS2019"
+}
+
+variable "report_server_image_sku" {
+  description = "SKU for the Report Server VM image"
+  type        = string
+  default     = "Express"
 }

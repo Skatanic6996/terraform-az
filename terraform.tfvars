@@ -10,8 +10,7 @@ sql_server_mssql_edition = "standard"
 report_server_mssql_edition = "standard"
 sql_server_data_disk_size = 100
 report_server_data_disk_size = 100
-sql_server_collation         = "SQL_Latin1_General_CP1_CI_AS"
-report_server_collation      = "SQL_Latin1_General_CP1_CI_AS"
+
 
 
 storage_account_name             = "mystorageaccountfortftestsaks"
